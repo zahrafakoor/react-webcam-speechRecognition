@@ -1,8 +1,9 @@
+import WebcamContainer from "./components/WebcamContainer";
 
 function App() {
   return (
     <>
-Hello !
+      <WebcamContainer />
     </>
   );
 }
