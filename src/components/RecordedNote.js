@@ -99,6 +99,7 @@ const RecordedNote = ({ capturing, classes }) => {
                                     <MenuItem value={'en-US'}>English</MenuItem>
                                     <MenuItem value={'de-DE'}>Deutsch</MenuItem>
                                     <MenuItem value={'ar-SA'}>Arabic</MenuItem>
+                                    <MenuItem value={'bn-IN'}>Hindi</MenuItem>
                                 </Select>
                             </FormControl>
                             <Button color="primary" onClick={handleSaveNote} disabled={!note || capturing}>
