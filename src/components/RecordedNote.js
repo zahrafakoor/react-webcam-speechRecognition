@@ -29,7 +29,7 @@ const styles = (theme) => ({
     },
     savedNotes: {
         width: "100%",
-        height:"80%",
+        height: "80%",
         overflow: 'auto'
     }
 });
@@ -123,8 +123,8 @@ const RecordedNote = ({ capturing, classes }) => {
                     <Card className={classes.noteContainer}>
                         <Typography color="primary" variant="h6">Notes</Typography>
                         <Box className={classes.savedNotes}>
-                            {savedNotes.map((n) => (
-                                <Typography key={n}>{n}</Typography>
+                            {savedNotes.map((n,index) => (
+                                <Typography key={n + index}>{index+1}. {n}</Typography>
                             ))}
                         </Box>
                     </Card>

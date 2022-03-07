@@ -69,8 +69,6 @@ const WebcamContainer = (props) => {
     }, [recordedChunks]);
 
     return (
-        <Container>
-
             <Card>
                 <CardMedia className={classes.webcamContainer} >
                     <Webcam audio ref={webcamRef} /></CardMedia>
@@ -86,7 +84,6 @@ const WebcamContainer = (props) => {
                     <RecordedNote capturing={capturing} />
                 </CardContent>
             </Card>
-        </Container>
     )
 }
 
