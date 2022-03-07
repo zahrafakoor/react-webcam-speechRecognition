@@ -1,16 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Button, Card, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core"
 import { useState, useEffect } from "react"
+import { Box, Button, Card, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles";
 
-const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const mic = new SpeechRecognition()
-
 mic.continuous = true
 mic.interimResults = true
 
-const styles = (theme) => ({
+const styles = () => ({
     container: {
         marginTop: 5
     },
@@ -45,6 +43,7 @@ const RecordedNote = ({ capturing, classes }) => {
 
     const handleListen = () => {
         mic.lang = lang;
+
         if (capturing) {
             mic.start()
             mic.onend = () => {
@@ -57,6 +56,7 @@ const RecordedNote = ({ capturing, classes }) => {
                 console.log('Stopped Mic on Click')
             }
         }
+
         mic.onstart = () => {
             console.log('Mics on')
         }
@@ -66,13 +66,13 @@ const RecordedNote = ({ capturing, classes }) => {
                 .map(result => result[0])
                 .map(result => result.transcript)
                 .join('')
-            console.log(transcript)
             setNote(transcript)
             mic.onerror = event => {
                 console.log(event.error)
             }
         }
     }
+
     const handleSaveNote = () => {
         setSavedNotes([...savedNotes, note])
         setNote('')
@@ -102,30 +102,32 @@ const RecordedNote = ({ capturing, classes }) => {
                                     <MenuItem value={'bn-IN'}>Hindi</MenuItem>
                                 </Select>
                             </FormControl>
+
                             <Button color="primary" onClick={handleSaveNote} disabled={!note || capturing}>
                                 Save Note
                             </Button>
                         </Box>
+
                         <TextField
-                            id="outlined-multiline-static"
                             multiline
                             rows="5"
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            value={note ? note : "Say something ..."}
+                            value={note || "Say something ..."}
                             inputProps={
                                 { readOnly: true, }
                             }
                         />
                     </Card>
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
                     <Card className={classes.noteContainer}>
                         <Typography color="primary" variant="h6">Notes</Typography>
                         <Box className={classes.savedNotes}>
-                            {savedNotes.map((n,index) => (
-                                <Typography key={n + index}>{index+1}. {n}</Typography>
+                            {savedNotes.map((n, index) => (
+                                <Typography key={n + index}>{index + 1}. {n}</Typography>
                             ))}
                         </Box>
                     </Card>

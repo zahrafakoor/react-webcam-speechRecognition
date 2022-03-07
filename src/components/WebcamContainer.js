@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, useCallback } from "react";
-import { Card, Container, CardMedia, CardContent, Typography, CardActions, Button, Box } from "@material-ui/core";
+import { Card, CardMedia, CardContent, CardActions, Button } from "@material-ui/core";
 import Webcam from "react-webcam";
 import { withStyles } from "@material-ui/core/styles";
 import RecordedNote from "./RecordedNote";
 
-const styles = (theme) => ({
+const styles = () => ({
     webcamContainer: {
         width: "100%",
         maxHeight: 300,
@@ -25,6 +25,7 @@ const WebcamContainer = (props) => {
     const mediaRecorderRef = useRef(null);
     const [capturing, setCapturing] = useState(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
+
     const handleStartCaptureClick = useCallback(() => {
         setCapturing(true);
         mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
@@ -69,21 +70,22 @@ const WebcamContainer = (props) => {
     }, [recordedChunks]);
 
     return (
-            <Card>
-                <CardMedia className={classes.webcamContainer} >
-                    <Webcam audio ref={webcamRef} /></CardMedia>
-                <CardContent>
-                    <CardActions>
-                        {capturing ? (
-                            <Button variant="contained" color="primary" size="small" onClick={handleStopCaptureClick}>Stop Capture</Button>
-                        ) : (
-                            <Button variant="contained" color="primary" size="small" onClick={handleStartCaptureClick}>Start Capture</Button>
-                        )}
-                        <Button variant="contained" color="primary" size="small" disabled={!recordedChunks.length > 0} onClick={handleDownload}>Download</Button>
-                    </CardActions>
-                    <RecordedNote capturing={capturing} />
-                </CardContent>
-            </Card>
+        <Card>
+            <CardMedia className={classes.webcamContainer} >
+                <Webcam audio ref={webcamRef} />
+            </CardMedia>
+            <CardContent>
+                <CardActions>
+                    {capturing ? (
+                        <Button variant="contained" color="primary" size="small" onClick={handleStopCaptureClick}>Stop Capture</Button>
+                    ) : (
+                        <Button variant="contained" color="primary" size="small" onClick={handleStartCaptureClick}>Start Capture</Button>
+                    )}
+                    <Button variant="contained" color="primary" size="small" disabled={!recordedChunks.length > 0} onClick={handleDownload}>Download</Button>
+                </CardActions>
+                <RecordedNote capturing={capturing} />
+            </CardContent>
+        </Card>
     )
 }
 
