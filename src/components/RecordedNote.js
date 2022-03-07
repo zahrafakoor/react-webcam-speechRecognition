@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Button, Card, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from "@material-ui/core"
+import { Box, Button, Card, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core"
 import { useState, useEffect } from "react"
 import { withStyles } from "@material-ui/core/styles";
 
@@ -11,14 +11,21 @@ mic.continuous = true
 mic.interimResults = true
 
 const styles = (theme) => ({
-    noteContainer: {
-        height: "100%",
-        maxHeight: 100,
-        padding: 5
+    container: {
+        marginTop: 10
     },
-    langSettingContainer: {
+    noteContainer: {
+        height: 200,
+        padding: 5,
+    },
+    headerBox: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 5
+    },
+    textField: {
+        width: "100%"
     }
 });
 
@@ -71,16 +78,14 @@ const RecordedNote = ({ capturing, classes }) => {
     }, [capturing])
 
     return (
-        <>
+        <Box className={classes.container}>
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Card className={classes.noteContainer}>
-                        <Box className={classes.langSettingContainer}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Language</InputLabel>
+                        <Box className={classes.headerBox}>
+                            <FormControl >
+                                <InputLabel color="primary">Language</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
                                     value={lang}
                                     label="Language"
                                     onChange={handleLangChange}
@@ -91,26 +96,33 @@ const RecordedNote = ({ capturing, classes }) => {
                                     <MenuItem value={'ar-SA'}>Arabic</MenuItem>
                                 </Select>
                             </FormControl>
-                            <Button onClick={handleSaveNote} disabled={!note || capturing}>
+                            <Button color="primary" onClick={handleSaveNote} disabled={!note || capturing}>
                                 Save Note
                             </Button>
                         </Box>
-
-                        <Typography variant="body2">
-                            {note ? note : "Say something ..."}
-                        </Typography>
+                        <TextField
+                            id="outlined-multiline-static"
+                            multiline
+                            rows="5"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            value={note ? note : "Say something ..."}
+                        />
                     </Card>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Card className={classes.noteContainer}>
-                        <Typography variant="h6">Notes</Typography>
-                        {savedNotes.map((n) => (
-                            <Typography key={n}>{n}</Typography>
-                        ))}
+                        <Typography color="primary" variant="h6">Notes</Typography>
+                        <Box>
+                            {savedNotes.map((n) => (
+                                <Typography key={n}>{n}</Typography>
+                            ))}
+                        </Box>
                     </Card>
                 </Grid>
             </Grid>
-        </>
+        </Box>
     )
 }
 
