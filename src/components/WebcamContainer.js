@@ -8,7 +8,7 @@ import RecordedNote from "./RecordedNote";
 const styles = (theme) => ({
     webcamContainer: {
         width: "100%",
-        maxHeight: 400,
+        maxHeight: 300,
         display: "flex",
         justifyContent: "center"
     },
@@ -72,23 +72,18 @@ const WebcamContainer = (props) => {
         <Container>
 
             <Card>
-                <CardMedia className={classes.webcamContainer}
-                > <Webcam audio ref={webcamRef} /></CardMedia>
+                <CardMedia className={classes.webcamContainer} >
+                    <Webcam audio ref={webcamRef} /></CardMedia>
                 <CardContent>
-                    <Box className={classes.contentHeaderContainet}>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Record your video
-                    </Typography>
                     <CardActions>
-                    {capturing ? (
-                        <Button color="primary" size="small" onClick={handleStopCaptureClick}>Stop Capture</Button>
-                    ) : (
-                        <Button color="primary" size="small" onClick={handleStartCaptureClick}>Start Capture</Button>
-                    )}
-                    <Button color="primary" size="small" disabled={!recordedChunks.length > 0} onClick={handleDownload}>Download</Button>
-                </CardActions>
-                </Box>
-                    <RecordedNote capturing={capturing}/>
+                        {capturing ? (
+                            <Button variant="contained" color="primary" size="small" onClick={handleStopCaptureClick}>Stop Capture</Button>
+                        ) : (
+                            <Button variant="contained" color="primary" size="small" onClick={handleStartCaptureClick}>Start Capture</Button>
+                        )}
+                        <Button variant="contained" color="primary" size="small" disabled={!recordedChunks.length > 0} onClick={handleDownload}>Download</Button>
+                    </CardActions>
+                    <RecordedNote capturing={capturing} />
                 </CardContent>
             </Card>
         </Container>
