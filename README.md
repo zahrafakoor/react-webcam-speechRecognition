@@ -1,4 +1,4 @@
-# Installing
+## Installing
 
 npm install
 
@@ -8,7 +8,7 @@ npm install
 npm start
 
 
-### Built With
+## Built With
 
 react-webcam
 
