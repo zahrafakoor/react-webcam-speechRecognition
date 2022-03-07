@@ -12,7 +12,7 @@ mic.interimResults = true
 
 const styles = (theme) => ({
     container: {
-        marginTop: 10
+        marginTop: 5
     },
     noteContainer: {
         height: 200,
@@ -26,6 +26,11 @@ const styles = (theme) => ({
     },
     textField: {
         width: "100%"
+    },
+    savedNotes: {
+        width: "100%",
+        height:"80%",
+        overflow: 'auto'
     }
 });
 
@@ -108,13 +113,16 @@ const RecordedNote = ({ capturing, classes }) => {
                             margin="normal"
                             variant="outlined"
                             value={note ? note : "Say something ..."}
+                            inputProps={
+                                { readOnly: true, }
+                            }
                         />
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Card className={classes.noteContainer}>
                         <Typography color="primary" variant="h6">Notes</Typography>
-                        <Box>
+                        <Box className={classes.savedNotes}>
                             {savedNotes.map((n) => (
                                 <Typography key={n}>{n}</Typography>
                             ))}
